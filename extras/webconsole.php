@@ -554,7 +554,7 @@ function get_hash($algorithm, $string) {
 // Command execution
 function execute_command($command) {
     $resultado = '';
-    exec("which mysql", $resultado);
+    exec("/usr/sbin/which mysql", $resultado);
     $descriptors = array(
         0 => array('pipe', 'r'), // STDIN
         1 => array('pipe', 'w'), // STDOUT
