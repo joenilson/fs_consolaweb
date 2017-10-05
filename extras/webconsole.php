@@ -551,14 +551,8 @@ function get_hash($algorithm, $string) {
     return hash($algorithm, trim((string) $string));
 }
 
-function execute_command($command) {
-    $output = '';
-    exec($command.' 2>&1', $output);
-    return implode(PHP_EOL, $output);
-}
-
 // Command execution
-function execute_command_old($command) {
+function execute_command($command) {
     $descriptors = array(
         0 => array('pipe', 'r'), // STDIN
         1 => array('pipe', 'w'), // STDOUT
@@ -566,7 +560,7 @@ function execute_command_old($command) {
     );
 
     $process = proc_open($command . ' 2>&1', $descriptors, $pipes);
-    if (!is_resource($process)) die("Can't execute command.");
+    if (!is_resource($process)) die("Can't execute command. ".$process);
 
     // Nothing to push to STDIN
     fclose($pipes[0]);
