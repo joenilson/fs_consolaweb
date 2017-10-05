@@ -26,7 +26,7 @@ $PASSWORD_HASH_ALGORITHM = 'sha256';
 // Home directory (multi-user mode supported)
 // Example: $HOME_DIRECTORY = '/tmp';
 //          $HOME_DIRECTORY = array('user1' => '/home/user1', 'user2' => '/home/user2');
-$HOME_DIRECTORY = '/var/www/vhosts/gohomegps.com';
+$HOME_DIRECTORY = '';
 
 // Code below is automatically generated from different components
 // For more information see: https://github.com/nickola/web-console
@@ -560,7 +560,7 @@ function execute_command($command) {
     );
 
     $process = proc_open($command . ' 2>&1', $descriptors, $pipes);
-    if (!is_resource($process)) die("Can't execute command. : ".$command." -> ".$process." :: ");
+    if (!is_resource($process)) die("Can't execute command. : ".$command." -> ".$process." :: ".$descriptors);
 
     // Nothing to push to STDIN
     fclose($pipes[0]);
