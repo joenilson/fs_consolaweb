@@ -553,6 +553,8 @@ function get_hash($algorithm, $string) {
 
 // Command execution
 function execute_command($command) {
+    $resultado = '';
+    exec("which mysql", $resultado);
     $descriptors = array(
         0 => array('pipe', 'r'), // STDIN
         1 => array('pipe', 'w'), // STDOUT
@@ -561,7 +563,7 @@ function execute_command($command) {
 
     $process = proc_open($command . ' 2>&1', $descriptors, $pipes);
     if (!is_resource($process)) {
-        die("Can't execute command. : ".$command." -> ".$process." :: ".var_dump($descriptors));
+        die("Can't execute command. : ".$command." -> ".$resultado." :: ".var_dump($descriptors));
     }
 
     // Nothing to push to STDIN
