@@ -551,8 +551,14 @@ function get_hash($algorithm, $string) {
     return hash($algorithm, trim((string) $string));
 }
 
-// Command execution
 function execute_command($command) {
+    $output = '';
+    exec($command.' 2>&1', $output);
+    return implode(PHP_EOL, $output);
+}
+
+// Command execution
+function execute_command_old($command) {
     $descriptors = array(
         0 => array('pipe', 'r'), // STDIN
         1 => array('pipe', 'w'), // STDOUT
