@@ -560,7 +560,9 @@ function execute_command($command) {
     );
 
     $process = proc_open($command . ' 2>&1', $descriptors, $pipes);
-    if (!is_resource($process)) die("Can't execute command. : ".$command." -> ".$process." :: ".$descriptors);
+    if (!is_resource($process)) {
+        die("Can't execute command. : ".$command." -> ".$process." :: ".var_dump($descriptors));
+    }
 
     // Nothing to push to STDIN
     fclose($pipes[0]);
